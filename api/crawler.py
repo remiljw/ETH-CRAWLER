@@ -1,11 +1,16 @@
-import requests
+import requests, cloudscraper
 from bs4 import BeautifulSoup
+
+scraper = cloudscraper.create_scraper()
+headers = {
+        "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
+    }
 
 def get_articles():
     articles  =[]
     
     url = "https://www.theblockcrypto.com"
-    page = requests.get(url)
+    page = requests.get(url, headers=headers)
     soup = BeautifulSoup(page.text, 'html.parser')
     article_list = soup.find(class_='w-100')
     article_list_items = article_list.find_all('article')
@@ -21,4 +26,21 @@ def get_articles():
     return articles
 
 def eth_price():
-    pass
+    url = "https://coingecko.com"
+    page = scraper.get(url, headers=headers)
+    soup = BeautifulSoup(page.text, 'html.parser')
+    crypto_price = soup.find('tbody')
+    eth_price = crypto_price.find('span', {'data-coin-symbol': 'eth'})
+    price = eth_price.get_text()
+
+    return price
+
+def address_value(address):
+    url = 'https://etherscan.io/address/{}'.format(address)
+    page = scraper.get(url, headers=headers)
+    soup = BeautifulSoup(page.text, 'html.parser')
+    data = soup.find(class_='card-body')
+    overview = data.find_all(class_='row')
+    value = overview[1].find(class_='col-md-8').get_text()
+
+    return value
