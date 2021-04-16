@@ -1,7 +1,7 @@
 import requests, cloudscraper
 from bs4 import BeautifulSoup
 
-scraper = cloudscraper.create_scraper(browser='chrome')
+scraper = cloudscraper.create_scraper()
 headers = {
         "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
     }
@@ -27,7 +27,7 @@ def get_articles():
 
 def eth_price():
     url = "https://coingecko.com"
-    page = scraper.get(url)
+    page = scraper.get(url, headers=headers)
     soup = BeautifulSoup(page.text, 'html.parser')
     crypto_price = soup.find('tbody')
     eth_price = crypto_price.find('span', {'data-coin-symbol': 'eth'})
@@ -41,6 +41,6 @@ def address_value(address):
     soup = BeautifulSoup(page.text, 'html.parser')
     data = soup.find(class_='card-body')
     overview = data.find_all(class_='row')
-    # value = overview[1].find(class_='col-md-8').get_text()
+    value = overview[1].find(class_='col-md-8').get_text()
 
-    return soup
+    return value
