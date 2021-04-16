@@ -1,7 +1,7 @@
-import requests, cfscrape
+import requests, cloudscraper
 from bs4 import BeautifulSoup
 
-scraper = cfscrape.create_scraper()
+scraper = cloudscraper.create_scraper()
 headers = {
         "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
     }
@@ -37,11 +37,10 @@ def eth_price():
 
 def address_value(address):
     url = 'https://etherscan.io/address/{}'.format(address)
-    page = scraper.get(url)
+    page = scraper.get(url, headers=headers)
     soup = BeautifulSoup(page.text, 'html.parser')
-    print(soup, 'ok trstl')
-    # data = soup.find(class_='card-body')
-    # overview = data.find_all(class_='row')
-    # value = overview[1].find(class_='col-md-8').get_text()
+    data = soup.find(class_='card-body')
+    overview = data.find_all(class_='row')
+    value = overview[1].find(class_='col-md-8').get_text()
 
-    return None
+    return value
