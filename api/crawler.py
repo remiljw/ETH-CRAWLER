@@ -41,6 +41,6 @@ def address_value(address):
     soup = BeautifulSoup(page.text, 'html.parser')
     data = soup.find(class_='card-body')
     overview = data.find_all(class_='row')
-    value = overview[1].find(class_='col-md-8').get_text()
+    # value = overview[1].find(class_='col-md-8').get_text()
 
-    return value
+    return None
