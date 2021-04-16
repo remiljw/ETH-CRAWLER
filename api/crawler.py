@@ -1,7 +1,7 @@
-import requests, cloudscraper
+import requests, cfscrape
 from bs4 import BeautifulSoup
 
-scraper = cloudscraper.create_scraper()
+scraper = cfscrape.create_scraper()
 headers = {
         "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
     }
