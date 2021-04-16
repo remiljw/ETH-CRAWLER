@@ -39,7 +39,7 @@ def address_value(address):
     url = 'https://etherscan.io/address/{}'.format(address)
     page = scraper.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
-    print(soup)
+    print(soup, 'ok trstl')
     # data = soup.find(class_='card-body')
     # overview = data.find_all(class_='row')
     # value = overview[1].find(class_='col-md-8').get_text()
