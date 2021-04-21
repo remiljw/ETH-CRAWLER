@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "name": "eth-crawler",
     "builds": [{
         "src": "eth_crawler/wsgi.py",
         "use": "@ardnt/now-python-wsgi",
