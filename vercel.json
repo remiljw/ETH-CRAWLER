@@ -1,0 +1,13 @@
+{
+    "version": 2,
+    "name": "eth-crawler",
+    "builds": [{
+        "src": "eth_crawler/wsgi.py",
+        "use": "@ardnt/now-python-wsgi",
+        "config": { "maxLambdaSize": "15mb" }
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "eth_crawler/wsgi.py"
+    }]
+}
